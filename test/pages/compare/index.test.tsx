@@ -3,6 +3,10 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+jest.mock('next/router', () => ({
+    useRouter: jest.fn(),
+}))
+
 describe('compare/index', () => {
     let user: ReturnType<(typeof userEvent)['setup']>
     let topicNameInputs: HTMLElement[]
