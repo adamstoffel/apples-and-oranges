@@ -1,4 +1,4 @@
-import CompareResponse from '@/models/CompareResponse'
+import CompareResponse from '@/models/CompareResult'
 import Grid from '@mui/joy/Grid'
 import Sheet from '@mui/joy/Sheet'
 import Typography from '@mui/joy/Typography'

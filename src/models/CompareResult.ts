@@ -1,4 +1,4 @@
-export default interface CompareResponse {
+export default interface CompareResult {
     responses: Array<{
         topicId: string
         responseNarrative: string
