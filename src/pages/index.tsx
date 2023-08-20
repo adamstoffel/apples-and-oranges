@@ -21,7 +21,7 @@ export default function Index() {
             </Typography>
             <Link href="/compare" passHref legacyBehavior>
                 <Button component="a" size="lg" sx={{ alignSelf: 'center' }}>
-                    Let&apos;s get started
+                    Create a comparison
                 </Button>
             </Link>
         </Stack>
