@@ -17,6 +17,7 @@
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "clone": "^2.1.2",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "next": "^13.4.19",
@@ -28,6 +29,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.0.1",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/clone": "^2.1.1",
     "@types/jest": "^29.5.3",
     "@types/uuid": "^9.0.2",
     "eslint-config-prettier": "^9.0.0",

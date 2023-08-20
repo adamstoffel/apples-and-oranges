@@ -4,6 +4,7 @@ import Grid from '@mui/joy/Grid'
 import Input from '@mui/joy/Input'
 import Sheet from '@mui/joy/Sheet'
 import Typography from '@mui/joy/Typography'
+import clone from 'clone'
 
 export default function TopicsEntry({
     topics,
@@ -11,7 +12,6 @@ export default function TopicsEntry({
 }: Pick<CompareRequest, 'topics'> & {
     onChange?: (newTopics: typeof topics) => void
 }) {
-    const topicsClone: typeof topics = JSON.parse(JSON.stringify(topics))
     return (
         <>
             <Typography level="h3">Topics</Typography>
@@ -20,21 +20,26 @@ export default function TopicsEntry({
                     <Grid key={topic.id} sm={6}>
                         <Sheet variant="soft" sx={{ padding: 1 }}>
                             <Input
+                                data-testid="topic-name-input"
                                 placeholder={`Topic Name ${index + 1}`}
                                 value={topic.name}
                                 size="lg"
                                 variant="soft"
                                 onChange={({ target }) => {
-                                    topicsClone[index].name = target.value
-                                    onChange(topicsClone)
+                                    const newTopics = clone(topics)
+                                    newTopics[index].name = target.value
+                                    onChange(newTopics)
                                 }}
                             />
                             <Typography level="title-md" sx={{ mt: 1 }}>
                                 URL Sources
                             </Typography>
                             <Autocomplete
+                                data-testid="topic-sources-input"
                                 placeholder={
-                                    topic.sources.length ? '' : 'Paste a URL'
+                                    topic.sources.length
+                                        ? ''
+                                        : 'Paste one or more URLs'
                                 }
                                 multiple
                                 value={topic.sources}
@@ -47,7 +52,8 @@ export default function TopicsEntry({
                                     inputValue ? [`Add "${inputValue}"`] : []
                                 }
                                 onChange={(_, newValue) => {
-                                    topicsClone[index].sources = newValue.map(
+                                    const newTopics = clone(topics)
+                                    newTopics[index].sources = newValue.map(
                                         (value) =>
                                             /^Add ".*"$/.test(value)
                                                 ? value.substring(
@@ -56,7 +62,7 @@ export default function TopicsEntry({
                                                   )
                                                 : value
                                     )
-                                    onChange(topicsClone)
+                                    onChange(newTopics)
                                 }}
                             />
                         </Sheet>

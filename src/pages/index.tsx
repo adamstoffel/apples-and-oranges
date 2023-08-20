@@ -19,7 +19,7 @@ export default function Index() {
                 for each topic. You will provide the source material(s) for each
                 topic, which the model will use to produce a response.
             </Typography>
-            <Link href="/compare" passHref>
+            <Link href="/compare" passHref legacyBehavior>
                 <Button component="a" size="lg" sx={{ alignSelf: 'center' }}>
                     Let&apos;s get started
                 </Button>
