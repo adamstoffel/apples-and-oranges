@@ -3,6 +3,7 @@ import ResultDisplay from '@/components/ResultDisplay'
 import TopicsEntry from '@/components/TopicsEntry'
 import CompareRequest from '@/models/CompareRequest'
 import CompareResult from '@/models/CompareResult'
+import StorageService from '@/utils/StorageService'
 import CheckIcon from '@mui/icons-material/Check'
 import ShareIcon from '@mui/icons-material/Share'
 import UndoIcon from '@mui/icons-material/Undo'
@@ -15,7 +16,6 @@ import Typography from '@mui/joy/Typography'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { useState } from 'react'
-import { v4 as uuid } from 'uuid'
 
 export default function Id({
     compareRequest,
@@ -81,7 +81,6 @@ export default function Id({
 }
 
 export const getServerSideProps: GetServerSideProps<{
-    id: string
     compareRequest: CompareRequest
     compareResult: CompareResult
 }> = async ({ params }) => {
@@ -89,26 +88,17 @@ export const getServerSideProps: GetServerSideProps<{
         throw new Error('Unexpected empty "id" parameter')
     }
 
-    // TODO get the real data
-    const id1 = uuid()
-    const id2 = uuid()
+    const storageService = new StorageService()
+    const comparison = await storageService.fetchComparison(params?.id)
+
+    if (!comparison) {
+        return { notFound: true }
+    }
+
     return {
         props: {
-            id: params.id,
-            compareRequest: {
-                topics: [
-                    { id: id1, name: 'Sample', sources: ['http://sample'] },
-                    { id: id2, name: 'Sample', sources: ['http://sample'] },
-                ],
-                prompt: 'sample',
-            },
-            compareResult: {
-                responses: [
-                    { topicId: id1, topicName: 'Sample', narrative: 'sample' },
-                    { topicId: id2, topicName: 'Sample', narrative: 'sample' },
-                ],
-                comparisonNarrative: 'sample',
-            },
+            compareRequest: comparison.request,
+            compareResult: comparison.result,
         },
     }
 }

@@ -4,8 +4,9 @@ import {
     validateCompareRequest,
 } from '@/models/CompareRequest'
 import CompareRequestResponse from '@/models/CompareRequestResponse'
+import { ComparisonService } from '@/utils/ComparisonService'
+import StorageService from '@/utils/StorageService'
 import { NextResponse, type NextRequest } from 'next/server'
-import { v4 as uuid } from 'uuid'
 
 export async function POST(request: NextRequest) {
     const data = await request.json()
@@ -22,10 +23,23 @@ export async function POST(request: NextRequest) {
         })
     }
 
-    // TODO: Generate the actual LLM response
-    const response = {
-        resultId: uuid(),
-    } satisfies CompareRequestResponse
+    try {
+        const comparisonService = new ComparisonService(data)
+        const compareResult = await comparisonService.getResponse()
 
-    return NextResponse.json(response)
+        const storageService = new StorageService()
+        const resultId = await storageService.persistComparison(
+            data,
+            compareResult
+        )
+
+        return NextResponse.json({ resultId } satisfies CompareRequestResponse)
+    } catch (err) {
+        return NextResponse.json(
+            createApiError(err?.toString() ?? 'An unknown error occurred.'),
+            {
+                status: 500,
+            }
+        )
+    }
 }
