@@ -110,13 +110,13 @@ export default function Index({}) {
                         <Typography level="h1" sx={{ flexGrow: 1 }}>
                             Create a comparison
                         </Typography>
-                        <Tooltip title="Go back to the homepage">
-                            <Link href="/" passHref legacyBehavior>
+                        <Link href="/" passHref legacyBehavior>
+                            <Tooltip title="Go back to the homepage">
                                 <IconButton variant="soft" component="a">
                                     <HomeIcon />
                                 </IconButton>
-                            </Link>
-                        </Tooltip>
+                            </Tooltip>
+                        </Link>
                         <Tooltip title="Clear data and start over">
                             <IconButton
                                 data-testid="compare-reset-button"

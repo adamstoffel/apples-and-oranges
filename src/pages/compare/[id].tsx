@@ -48,20 +48,20 @@ export default function Id({
                     <Typography level="h1" sx={{ flexGrow: 1 }}>
                         Comparison
                     </Typography>
-                    <Tooltip title="Go back to the homepage">
-                        <Link href="/" passHref legacyBehavior>
+                    <Link href="/" passHref legacyBehavior>
+                        <Tooltip title="Go back to the homepage">
                             <IconButton variant="soft" component="a">
                                 <HomeIcon />
                             </IconButton>
-                        </Link>
-                    </Tooltip>
-                    <Tooltip title="Start over with a new request">
-                        <Link href="/compare" passHref legacyBehavior>
+                        </Tooltip>
+                    </Link>
+                    <Link href="/compare" passHref legacyBehavior>
+                        <Tooltip title="Start over with a new request">
                             <IconButton variant="soft" component="a">
                                 <ReplayIcon />
                             </IconButton>
-                        </Link>
-                    </Tooltip>
+                        </Tooltip>
+                    </Link>
                     <Tooltip title="Press here to copy a permalink to this comparison">
                         <IconButton
                             variant="soft"
