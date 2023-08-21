@@ -28,7 +28,7 @@ export default function Index({
             <Typography level="body-lg">
                 This project can help you compare two topics to each other using
                 the GPT-3.5 language learning model. You&apos;ll be able to
-                provide a questions or prompt for the model, and it will respond
+                provide a question or prompt for the model, and it will respond
                 for each topic. You will provide the source material(s) for each
                 topic, which the model will use to produce a response.
             </Typography>
