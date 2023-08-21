@@ -5,8 +5,9 @@ import CompareRequest from '@/models/CompareRequest'
 import CompareResult from '@/models/CompareResult'
 import StorageService from '@/utils/StorageService'
 import CheckIcon from '@mui/icons-material/Check'
+import HomeIcon from '@mui/icons-material/Home'
+import ReplayIcon from '@mui/icons-material/Replay'
 import ShareIcon from '@mui/icons-material/Share'
-import UndoIcon from '@mui/icons-material/Undo'
 import Box from '@mui/joy/Box'
 import Divider from '@mui/joy/Divider'
 import IconButton from '@mui/joy/IconButton'
@@ -47,13 +48,20 @@ export default function Id({
                     <Typography level="h1" sx={{ flexGrow: 1 }}>
                         Comparison
                     </Typography>
-                    <Tooltip title="Start over with a new request">
-                        <Link href="/" passHref legacyBehavior>
+                    <Link href="/" passHref legacyBehavior>
+                        <Tooltip title="Go back to the homepage">
                             <IconButton variant="soft" component="a">
-                                <UndoIcon />
+                                <HomeIcon />
                             </IconButton>
-                        </Link>
-                    </Tooltip>
+                        </Tooltip>
+                    </Link>
+                    <Link href="/compare" passHref legacyBehavior>
+                        <Tooltip title="Start over with a new request">
+                            <IconButton variant="soft" component="a">
+                                <ReplayIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Link>
                     <Tooltip title="Press here to copy a permalink to this comparison">
                         <IconButton
                             variant="soft"

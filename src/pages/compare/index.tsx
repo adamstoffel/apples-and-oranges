@@ -3,9 +3,10 @@ import TopicsEntry from '@/components/TopicsEntry'
 import { isApiError } from '@/models/ApiError'
 import CompareRequest from '@/models/CompareRequest'
 import CompareRequestResponse from '@/models/CompareRequestResponse'
+import SmartToyIcon from '@mui/icons-material/CompareArrows'
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
+import HomeIcon from '@mui/icons-material/Home'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
 import Box from '@mui/joy/Box'
 import Button from '@mui/joy/Button'
 import Divider from '@mui/joy/Divider'
@@ -14,6 +15,7 @@ import Stack from '@mui/joy/Stack'
 import Tooltip from '@mui/joy/Tooltip'
 import Typography from '@mui/joy/Typography'
 import clone from 'clone'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { v4 as uuid } from 'uuid'
@@ -108,6 +110,13 @@ export default function Index({}) {
                         <Typography level="h1" sx={{ flexGrow: 1 }}>
                             Create a comparison
                         </Typography>
+                        <Link href="/" passHref legacyBehavior>
+                            <Tooltip title="Go back to the homepage">
+                                <IconButton variant="soft" component="a">
+                                    <HomeIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Link>
                         <Tooltip title="Clear data and start over">
                             <IconButton
                                 data-testid="compare-reset-button"
