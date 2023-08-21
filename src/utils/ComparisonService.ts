@@ -5,7 +5,7 @@ import OpenAI from 'openai'
 const SYSTEM_TOPIC_COMPLETION_INSTRUCTION =
     'You will be provided with a list of source URLs (delimited with XML tags) about the same topic. Thoroughly review the information on these webpages and use only the information on these webpages to respond to the prompt.'
 
-export class ComparisonService {
+export default class ComparisonService {
     private readonly openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY!,
     })
