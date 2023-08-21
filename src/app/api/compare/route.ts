@@ -4,7 +4,7 @@ import {
     validateCompareRequest,
 } from '@/models/CompareRequest'
 import CompareRequestResponse from '@/models/CompareRequestResponse'
-import { ComparisonService } from '@/utils/ComparisonService'
+import ComparisonService from '@/utils/ComparisonService'
 import StorageService from '@/utils/StorageService'
 import { NextResponse, type NextRequest } from 'next/server'
 

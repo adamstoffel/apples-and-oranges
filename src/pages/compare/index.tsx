@@ -162,7 +162,9 @@ export default function Index({}) {
                     loadingPosition="start"
                     startDecorator={<SmartToyIcon />}
                 >
-                    Generate comparison
+                    {awaitingGeneration
+                        ? 'Working on it...'
+                        : 'Generate comparison'}
                 </Button>
             </Stack>
         </form>
