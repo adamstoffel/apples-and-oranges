@@ -4,5 +4,4 @@ export default interface CompareResult {
         topicName: string
         narrative: string
     }>
-    comparisonNarrative: string
 }

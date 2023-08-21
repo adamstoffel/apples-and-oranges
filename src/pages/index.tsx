@@ -1,6 +1,9 @@
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import Button from '@mui/joy/Button'
 import Stack from '@mui/joy/Stack'
 import Typography from '@mui/joy/Typography'
+
 import Link from 'next/link'
 
 export default function Index() {
@@ -19,11 +22,33 @@ export default function Index() {
                 for each topic. You will provide the source material(s) for each
                 topic, which the model will use to produce a response.
             </Typography>
-            <Link href="/compare" passHref legacyBehavior>
-                <Button component="a" size="lg" sx={{ alignSelf: 'center' }}>
-                    Create a comparison
-                </Button>
-            </Link>
+            <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+            >
+                <Link href="/compare" passHref legacyBehavior>
+                    <Button
+                        component="a"
+                        size="lg"
+                        startDecorator={<CompareArrowsIcon />}
+                    >
+                        Create a comparison
+                    </Button>
+                </Link>
+                <Link href="/compare?sample" passHref legacyBehavior>
+                    <Button
+                        component="a"
+                        size="lg"
+                        color="neutral"
+                        variant="soft"
+                        startDecorator={<LightbulbIcon />}
+                    >
+                        Start with a sample
+                    </Button>
+                </Link>
+            </Stack>
         </Stack>
     )
 }

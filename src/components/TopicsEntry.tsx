@@ -26,7 +26,10 @@ export default function TopicsEntry({
                     <Grid key={topic.id} sm={6} xs={12}>
                         <Sheet variant="soft" sx={{ padding: 1 }}>
                             {readonly ? (
-                                <Typography level="body-lg">
+                                <Typography
+                                    data-testid="topic-name-display"
+                                    level="body-lg"
+                                >
                                     {topic.name}
                                 </Typography>
                             ) : (
@@ -43,15 +46,11 @@ export default function TopicsEntry({
                                     }}
                                 />
                             )}
-                            <Typography
-                                level="title-sm"
-                                textTransform="uppercase"
-                                sx={{ mt: 1 }}
-                            >
-                                Sources
-                            </Typography>
                             {readonly ? (
-                                <List size="sm">
+                                <List
+                                    data-testid="topic-sources-display"
+                                    size="sm"
+                                >
                                     {topic.sources.map((source, index) => (
                                         <ListItem key={index}>
                                             <ListItemContent>
@@ -68,10 +67,11 @@ export default function TopicsEntry({
                             ) : (
                                 <Autocomplete
                                     data-testid="topic-sources-input"
+                                    sx={{ mt: 1 }}
                                     placeholder={
                                         topic.sources.length
                                             ? ''
-                                            : 'Paste one or more URLs'
+                                            : 'Paste one or more source URLs'
                                     }
                                     multiple
                                     value={topic.sources}

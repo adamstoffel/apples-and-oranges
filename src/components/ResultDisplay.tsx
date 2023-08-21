@@ -13,26 +13,24 @@ export default function ResultDisplay({ result }: { result: CompareResult }) {
                     <Grid key={response.topicId} sm={6} xs={12}>
                         <Sheet variant="soft" sx={{ padding: 1 }}>
                             <Typography
+                                data-testid={`result-title-${response.topicId}`}
                                 level="title-sm"
                                 textTransform="uppercase"
+                                sx={{ mb: 1 }}
                             >
                                 {response.topicName}
                             </Typography>
-                            <Typography level="body-md">
+                            <Typography
+                                data-testid={`result-narrative-${response.topicId}`}
+                                level="body-md"
+                                sx={{ whiteSpace: 'pre-line', mt: 1 }}
+                            >
                                 {response.narrative}
                             </Typography>
                         </Sheet>
                     </Grid>
                 ))}
             </Grid>
-            <Sheet variant="soft" sx={{ padding: 1, mt: 1 }}>
-                <Typography level="title-sm" textTransform="uppercase">
-                    How these topics compare&hellip;
-                </Typography>
-                <Typography level="body-md">
-                    {result.comparisonNarrative}
-                </Typography>
-            </Sheet>
         </Box>
     )
 }

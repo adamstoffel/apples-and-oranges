@@ -4,6 +4,8 @@ import { isApiError } from '@/models/ApiError'
 import CompareRequest from '@/models/CompareRequest'
 import CompareRequestResponse from '@/models/CompareRequestResponse'
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import SmartToyIcon from '@mui/icons-material/SmartToy'
 import Box from '@mui/joy/Box'
 import Button from '@mui/joy/Button'
 import Divider from '@mui/joy/Divider'
@@ -24,16 +26,37 @@ const emptyRequest: CompareRequest = {
     prompt: '',
 }
 
-export default function Index() {
+const sampleRequest: CompareRequest = {
+    topics: [
+        {
+            id: uuid(),
+            name: 'Apples',
+            sources: [
+                'https://en.m.wikipedia.org/wiki/Apple',
+                'https://www.britannica.com/plant/apple-fruit-and-tree',
+            ],
+        },
+        {
+            id: uuid(),
+            name: 'Oranges',
+            sources: ['https://en.m.wikipedia.org/wiki/Orange_(fruit)'],
+        },
+    ],
+    prompt: 'What does this fruit taste like?',
+}
+
+export default function Index({}) {
     const router = useRouter()
+    const useSample = router.query['sample'] !== undefined
 
-    const [compareRequest, setCompareRequest] = useState<CompareRequest>(
-        clone(emptyRequest)
+    const [compareRequest, setCompareRequest] = useState(
+        clone(useSample ? sampleRequest : emptyRequest)
     )
-
+    const [awaitingGeneration, setAwaitingGeneration] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     async function generateComparison() {
+        setAwaitingGeneration(true)
         const response = await fetch('/api/compare', {
             method: 'POST',
             body: JSON.stringify(compareRequest),
@@ -53,6 +76,7 @@ export default function Index() {
                 // ignore
             }
             setErrorMessage(message)
+            setAwaitingGeneration(false)
         } else {
             const data: CompareRequestResponse = await response.json()
             router.push(`/compare/${data.resultId}`)
@@ -95,6 +119,17 @@ export default function Index() {
                                 <DeleteSweepIcon />
                             </IconButton>
                         </Tooltip>
+                        <Tooltip title="Fill with sample data">
+                            <IconButton
+                                data-testid="compare-sample-button"
+                                variant="soft"
+                                onClick={() =>
+                                    setCompareRequest(clone(sampleRequest))
+                                }
+                            >
+                                <LightbulbIcon />
+                            </IconButton>
+                        </Tooltip>
                     </Stack>
                     {typeof errorMessage === 'string' && (
                         <Typography
@@ -119,7 +154,14 @@ export default function Index() {
                         setCompareRequest({ ...compareRequest, prompt })
                     }
                 />
-                <Button size="lg" sx={{ alignSelf: 'center' }} type="submit">
+                <Button
+                    size="lg"
+                    sx={{ alignSelf: 'center' }}
+                    type="submit"
+                    loading={awaitingGeneration}
+                    loadingPosition="start"
+                    startDecorator={<SmartToyIcon />}
+                >
                     Generate comparison
                 </Button>
             </Stack>

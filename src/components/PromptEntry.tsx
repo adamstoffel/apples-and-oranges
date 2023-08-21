@@ -17,9 +17,12 @@ export default function PromptEntry({
             <Typography level="h3">Prompt</Typography>
             <Sheet variant="soft" sx={{ padding: 1 }}>
                 {readonly ? (
-                    <Typography level="body-md">{prompt}</Typography>
+                    <Typography data-testid="prompt-display" level="body-md">
+                        {prompt}
+                    </Typography>
                 ) : (
                     <Textarea
+                        data-testid="prompt-input"
                         minRows={2}
                         placeholder="What would you like to find out about?"
                         value={prompt}
